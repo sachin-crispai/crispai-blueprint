@@ -1,0 +1,46 @@
+# <PROJECT-NAME> — Claude Context
+
+## Project
+<One-line description of what this project builds and its target.>
+
+## Key Directories
+- `src/` — core source code
+- `docs/` — documentation and specs
+- `output/` — generated artifacts
+- `db/` — schema and migrations (if applicable)
+
+## Database (if applicable)
+- Local PostgreSQL 15, port 5432, user: sachin
+- Schema: `<schema_name>`
+- Run `make migrate` to apply migrations
+
+## Model Routing
+| Task | Model | Why |
+|------|-------|-----|
+| Summaries, drafts | `qwen2.5:32b-ctx128k` via Ollama | Free local |
+| Embeddings | `nomic-embed-text` via Ollama | Free local, 768-dim |
+| Web search | `gemini-2.5-flash-lite` via Gemini | Unlimited RPD |
+| Quality research | `gemini-2.5-flash` via Gemini | Better reasoning |
+| Long-form writing | `Qwen/Qwen3-235B-A22B-Instruct-2507` via Nebius batch | $0.10/$0.30 |
+| Reasoning | `deepseek-ai/DeepSeek-R1-0528` via Nebius | Chain-of-thought |
+| Fast structured output | `Qwen/Qwen3-32B-fast` via Nebius | Speed + structure |
+| Final QA + assembly | Claude Sonnet 4.6 | Tool use, consistency |
+
+## API Keys
+- `GEMINI_API_KEY` — Google Gemini
+- `CRISPAI_NEBIUS_<PROJECT>` — Nebius AI Studio
+
+## Nebius Endpoint
+Base URL: https://api.studio.nebius.com/v1/
+Auth: Bearer $CRISPAI_NEBIUS_<PROJECT>
+
+## PR / Branch Convention
+- Branch: `feature/<phase>-<description>`
+- One issue + one PR per phase
+- PRs must pass `make verify` before merge
+
+## User Preferences
+- Diffs in terminal only
+- Minimal output — expert programmer, no hand-holding
+- Local models first, cloud burst only when needed
+- PDF toolchain: pandoc + typst

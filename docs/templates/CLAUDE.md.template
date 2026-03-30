@@ -3,6 +3,14 @@
 ## Project
 <One-line description of what this project builds and its target.>
 
+## Blueprint
+Standards and templates: /Volumes/WORK900_CRISPAI/CRISPAI-BLUEPRINT
+- New project checklist:  docs/guides/new-project-checklist.md
+- Model routing table:    docs/practices/model-routing.md
+- API key conventions:    docs/practices/api-keys.md
+- Worktree guide:         docs/practices/worktree.md
+- General best practices: docs/practices/general.md
+
 ## Key Directories
 - `src/` — core source code
 - `docs/` — documentation and specs
@@ -27,12 +35,19 @@
 | Final QA + assembly | Claude Sonnet 4.6 | Tool use, consistency |
 
 ## API Keys
-- `GEMINI_API_KEY` — Google Gemini
-- `CRISPAI_NEBIUS_<PROJECT>` — Nebius AI Studio
+Keys follow convention: `CRISPAI-<VENDOR>-<PROJECT-ID>`
+
+| Key | Used For |
+|-----|----------|
+| `CRISPAI-GEMINI-<PROJECT-ID>` | Web search, light research |
+| `CRISPAI-NEBIUS-<PROJECT-ID>` | Embeddings overflow, batch writing |
+| `CRISPAI-OPENAI-<PROJECT-ID>` | GPT-4o / embeddings fallback |
+| `CRISPAI-ANTHROPIC-<PROJECT-ID>` | Final QA, tool use |
+| `CRISPAI-GITHUB-<PROJECT-ID>` | GitHub API / repo automation |
 
 ## Nebius Endpoint
 Base URL: https://api.studio.nebius.com/v1/
-Auth: Bearer $CRISPAI_NEBIUS_<PROJECT>
+Auth: Bearer $CRISPAI-NEBIUS-<PROJECT-ID>
 
 ## PR / Branch Convention
 - Branch: `feature/<phase>-<description>`

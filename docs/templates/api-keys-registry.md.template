@@ -1,0 +1,49 @@
+# API Keys Registry — <PROJECT-ID>
+
+All keys follow the convention: `CRISPAI-<VENDOR>-<PROJECT-ID>`
+
+## Keys Required for This Project
+
+Add these to `~/.claude/settings.json` under the `env` block before starting work.
+
+```json
+{
+  "env": {
+    "CRISPAI-GEMINI-<PROJECT-ID>":    "<provision at aistudio.google.com>",
+    "CRISPAI-NEBIUS-<PROJECT-ID>":    "<provision at studio.nebius.com>",
+    "CRISPAI-OPENAI-<PROJECT-ID>":    "<provision at platform.openai.com>",
+    "CRISPAI-ANTHROPIC-<PROJECT-ID>": "<provision at console.anthropic.com>",
+    "CRISPAI-GITHUB-<PROJECT-ID>":    "<provision at github.com/settings/tokens>"
+  }
+}
+```
+
+## Key Status
+
+| Key | Status | Used For |
+|-----|--------|----------|
+| `CRISPAI-GEMINI-<PROJECT-ID>` | [ ] provisioned | Web search, light research (flash-lite) |
+| `CRISPAI-NEBIUS-<PROJECT-ID>` | [ ] provisioned | Embeddings overflow, batch writing, fast structured output |
+| `CRISPAI-OPENAI-<PROJECT-ID>` | [ ] provisioned | GPT-4o fallback, embeddings fallback |
+| `CRISPAI-ANTHROPIC-<PROJECT-ID>` | [ ] provisioned | Final QA, tool use, assembly (claude-sonnet-4-6) |
+| `CRISPAI-GITHUB-<PROJECT-ID>` | [ ] provisioned | GitHub API, repo automation |
+
+## Nebius Endpoint
+```
+Base URL: https://api.studio.nebius.com/v1/
+Auth:     Bearer $CRISPAI-NEBIUS-<PROJECT-ID>
+Protocol: OpenAI-compatible
+```
+
+## Verify All Keys
+```bash
+for key in \
+  CRISPAI-GEMINI-<PROJECT-ID> \
+  CRISPAI-NEBIUS-<PROJECT-ID> \
+  CRISPAI-OPENAI-<PROJECT-ID> \
+  CRISPAI-ANTHROPIC-<PROJECT-ID> \
+  CRISPAI-GITHUB-<PROJECT-ID>; do
+  val=$(printenv "$key")
+  echo "$key: ${val:+SET}${val:-MISSING}"
+done
+```
